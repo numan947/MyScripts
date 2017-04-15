@@ -1,0 +1,46 @@
+#!/bin/bash
+
+c_cpp_file="$1"
+
+
+# check for c/cpp file
+bName=${1##*.};
+if [[ "$bName" != "cpp" && "$bName" != "c" ]] ; then
+	echo "Error! Wrong file type."
+	exit
+fi
+
+
+# determine whether c or cpp
+fName=${1%.c}
+if [[ "$fName" == "$c_cpp_file" ]]; then
+ 	fName=${1%.cpp}
+fi
+
+
+# echo $bName
+
+# echo $c_cpp_file
+
+# echo $fName
+
+
+if avr-gcc -w -mmcu=atmega32 -c "$c_cpp_file" ; then
+	echo  "Compiled"
+	
+	if  avr-gcc -w -mmcu=atmega32 "$fName".o -o "$fName".out  ; then
+		echo ".o file to out .out file"
+		
+		if  avr-objcopy -O ihex "$fName".out "$fName".hex  ; then
+			echo ".out file to .hex file"
+
+			#configured for atmega32 and usbasp
+			if  sudo avrdude -c usbasp -p m32 -U flash:w:"$fName".hex  ; then
+				echo "Done!"
+			fi
+		fi
+	fi
+fi
+
+
+
