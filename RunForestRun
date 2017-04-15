@@ -41,8 +41,10 @@ if avr-gcc -w -mmcu=atmega32 -c "$c_cpp_file" ; then
 		if  avr-objcopy -O ihex "$fName".out "$fName".hex  ; then
 			echo ".out file to .hex file"
 
-			#configured for atmega32 and usbasp
-			if  sudo avrdude -c usbasp -p m32 -U flash:w:"$fName".hex  ; then
+			# configured for atmega32 and usbasp
+			# sudo avrdude –p <DEVICE> -P usb –c usbasp –U flash:w:<FILE>
+			#sudo avrdude -c usbasp -p m32 -U flash:w:"$fName".hex
+			if  sudo avrdude -p m32 -P usb -c usbasp -U flash:w:"$fName".hex  ; then
 				echo "Done!"
 			fi
 		fi
