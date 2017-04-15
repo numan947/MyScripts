@@ -1,5 +1,12 @@
 #!/bin/bash
 
+
+
+# this is a script I use in avr programming, this script compiles c/cpp file using
+# avr-gcc, generates hex file and then burn the hex file to connected Atmega32 chip using
+# USBasp-AVR programmer
+
+
 c_cpp_file="$1"
 
 
