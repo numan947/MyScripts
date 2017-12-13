@@ -1,3 +1,4 @@
 service network-manager stop
 sudo rm /var/lib/NetworkManager/NetworkManager.state
 service network-manager start
+sudo killall nm-applet && nm-applet & 
