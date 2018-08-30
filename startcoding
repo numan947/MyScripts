@@ -1,0 +1,18 @@
+#!/bin/sh
+
+PH="/home/numan947/MyHome/Codes/PI"
+if [ "$#" -eq 1 ]; then
+	if [ ! -f "$PH/$1.cpp" ]; then
+		cp "$PH/template.cpp" "$PH/$1.cpp"
+		echo "completed"
+	else
+		echo "FILE ALREADY EXISTS!!!!"
+	fi
+	xdg-open "$PH/input.txt"
+	xdg-open "$PH/output.txt"
+	xdg-open "$PH/$1.cpp"
+	# cd "$PH"
+	# exec bash
+else
+	echo "NEED TO PROVIDE FILE NAME!!"
+fi

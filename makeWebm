@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ "$#" -eq 1 ]; then
+	current_date_time="`date +%Y%m%d%H%M%S`"
+	file=$1
+	ofile="${file%.*}"
+	ext="${file##*.}"
+	ffmpeg -i "$1" -vcodec libvpx -acodec libvorbis "$ofile".webm
+else
+	echo "makeWebm<SPACE><FileName>"
+fi

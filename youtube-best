@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ "$#" -ne 1 ]; then
+	echo "Illegal number of parameters"
+    exit 1
+fi
+
+vv=$(youtube-dl -F $1 | grep -i best | awk -F ' ' '{print $1}')
+
+echo $vv
+
+youtube-dl -f "$vv" "$1"

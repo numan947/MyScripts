@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Illegal number of parameters"
+    exit 1
+fi
+
+file=$1
+
+ofile=${file%.*} 
+
+ssconvert "$1" "$ofile".csv

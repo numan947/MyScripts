@@ -1,0 +1,20 @@
+#!/bin/bash
+if [ "$#" -ne 1 ]; then
+    echo "Illegal number of parameters"
+    exit 1
+fi
+
+file=$1
+
+ofile=${file%.*} 
+
+
+echo "Compiling with....std c++11....."
+
+
+if g++ -std=c++11 "$1" -o "$ofile"; then 
+	echo "Success!";
+	./$ofile
+else 
+	echo "Failure"; 
+fi

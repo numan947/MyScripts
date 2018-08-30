@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ "$#" -eq 4 ]; then
+	current_date_time="`date +%Y%m%d%H%M%S`"
+	file=$1
+	ofile="${file%.*}"
+	ext="${file##*.}"
+
+	echo $ofile
+	ffmpeg -i "$1" -ss "$2" -c copy -t "$3" "$4_$current_date_time.$ext"
+else
+	echo "clipper<SPACE><file_name><SPACE><startposition(hh:mm:ss)><SPACE><number_of_seconds_to_cut><SPACE><Name>"
+fi

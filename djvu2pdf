@@ -1,0 +1,13 @@
+#!/bin/sh
+
+f="$1"
+ofile="${f%.*}"
+ext="${f##*.}"
+
+pg=$(djvused -e 'n' $f)
+for i in $(seq 1 $pg)
+do
+    djvu2hocr -p $i $f | sed 's/ocrx/ocr/g' > `printf "pg%04d.html" $i`
+    ddjvu -format=tiff -page=$i $f `printf "pg%04d.tiff" $i`
+done
+pdfbeads -o "$f".pdf;
